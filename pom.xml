@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example.www</groupId>
+    <artifactId>bare-java-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>bare-java-app</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputDirectory>target</project.build.outputDirectory>
+        <mainClass>com.example.www.App</mainClass>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <configuration>
+                    <mainClass>${mainClass}</mainClass>
+                    <!--<arguments>-->
+                        <!--<argument>server</argument>-->
+                        <!--<argument>target/classes/config/conscious/dev.yml</argument>-->
+                    <!--</arguments>-->
+                    <systemProperties>
+                        <systemProperty>
+                            <key>application.name</key>
+                            <value>bare-java-app</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <key>application.home</key>
+                            <value>.</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <key>application.environment</key>
+                            <value>dev</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- supports junit 4 tests -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
