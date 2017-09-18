@@ -1,4 +1,4 @@
-package com.example.www;
+package com.shubhamsethi.www;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

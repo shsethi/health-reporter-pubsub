@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example.www</groupId>
-    <artifactId>bare-java-app</artifactId>
+    <groupId>com.shubhamsethi.www</groupId>
+    <artifactId>health-reporter-pubsub</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>bare-java-app</name>
+    <name>health-reporter-pubsub</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -15,7 +15,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.outputDirectory>target</project.build.outputDirectory>
-        <mainClass>com.example.www.App</mainClass>
+        <mainClass>com.shubhamsethi.www.App</mainClass>
     </properties>
 
     <dependencies>
@@ -67,7 +67,7 @@
                     <systemProperties>
                         <systemProperty>
                             <key>application.name</key>
-                            <value>bare-java-app</value>
+                            <value>health-reporter-pubsub</value>
                         </systemProperty>
                         <systemProperty>
                             <key>application.home</key>
