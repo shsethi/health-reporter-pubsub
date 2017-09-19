@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by shsethi on 9/18/17.
@@ -19,11 +20,8 @@ public class HealthQueue implements Runnable {
     }
 
     public void publish(Event e) {
-
         //TODO check
         eventQ.add(e);
-
-
     }
 
     public void addReporter(Reporters r) {
@@ -32,13 +30,10 @@ public class HealthQueue implements Runnable {
     @Override
     public void run() {
 
-        Event event;
         while (true) {
+            Event event;
             try {
-                if(eventQ.size()==0){
-                    Thread.sleep(1000); //TODO check
-                }
-                event = eventQ.poll();
+                event = eventQ.poll(1, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 continue;
             }
@@ -46,9 +41,10 @@ public class HealthQueue implements Runnable {
                 System.out.println("Unexpected ex"+e.getMessage());
                 continue;
             }
-
-            for(Reporters r : reporters){
-                r.report(event);
+            if(event != null) {
+                for (Reporters r : reporters) {
+                    r.report(event);
+                }
             }
         }
     }

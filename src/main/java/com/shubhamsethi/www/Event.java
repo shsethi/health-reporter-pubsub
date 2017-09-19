@@ -9,4 +9,9 @@ class Event {
     public Event(boolean value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "Status= "+value;
+    }
 }

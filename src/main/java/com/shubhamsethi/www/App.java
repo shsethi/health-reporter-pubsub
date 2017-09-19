@@ -5,20 +5,18 @@ public class App
     public static void main (String [] args)
             throws Exception {
 
-//        Queue eventQ = new ArrayBlockingQueue(100);
-        HealthQueue h =  new HealthQueue();
-        h.addReporter(new FileReporterPubSub());
-        h.addReporter(new ConsoleReporterPubSub());
-
         HealthQueue healthQueue  = new HealthQueue();
-        Thread healthQ = new Thread(h);
+        healthQueue.addReporter(new FileReporterPubSub());
+        healthQueue.addReporter(new ConsoleReporterPubSub());
+        Thread healthQThread = new Thread(healthQueue);
 
-        HealthPublisher healthPublisher =  new HealthPublisher(healthQueue);
-        Thread publisherThread = new Thread(healthPublisher);
+
+        HealthChecker healthChecker =  new HealthChecker(healthQueue);
+        Thread checkerThread = new Thread(healthChecker);
 
 
-        publisherThread.start();
-        healthQ.start();
+        checkerThread.start();
+        healthQThread.start();
 
     }
 }
